@@ -1,24 +1,21 @@
 import React, { Component } from 'react';
-import liftApp from './src/login/reducers'
+import loginReducer from './src/login/reducers'
 import { StackNavigator } from 'react-navigation';
-import Login from "./src/login/Login";
-import ProfileScreen from "./src/pages/ProfileScreen";
+import Main from "./src/login/Login";;
 import { Provider } from 'react-redux'
 import {applyMiddleware, createStore} from 'redux';
-import {createLogger} from "redux-logger";
+import Logger from "./src/components/Logger";
+import GenericScreen from "./src/components/GenericScreen";
+
 
 const SimpleApp = StackNavigator({
-    Home: {
-        screen: Login
-    },
-    Profile: {
-        screen: ProfileScreen
-    }
+    Login: { screen: Main },
+    Generic: { screen: GenericScreen }
+}, {
+    headerMode: "none"
 });
 
-const logger = createLogger();
-
-const store = createStore(liftApp, applyMiddleware(logger));
+const store = createStore(loginReducer, applyMiddleware(Logger));
 
 export default class App extends Component {
     render() {

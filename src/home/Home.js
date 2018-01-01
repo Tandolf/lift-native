@@ -1,36 +1,34 @@
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView, Text } from 'react-native';
 import Container from "../components/Container";
+import { StyleSheet, ScrollView, Text } from 'react-native';
 import connect from "react-redux/es/connect/connect";
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const styles = StyleSheet.create({
     scroll: {
-        backgroundColor: '#ddd6e1',
+        backgroundColor: '#e1e100',
         padding: 30,
         flex: 1,
         justifyContent: 'center'
     }
 });
 
-class ProfileScreen extends Component {
+class Home extends Component {
 
     constructor(props) {
         super(props)
     }
 
     static navigationOptions = {
-        header: null
+        tabBarLabel: 'Home',
+        tabBarIcon: () => (<Icon size={24} color="white" name="home" />)
     };
 
     render(){
-        const { params } = this.props.navigation.state;
         return (
             <ScrollView contentContainerStyle={styles.scroll}>
                 <Container>
-                    <Text style={{fontWeight: 'bold', fontSize: 30}}>You are now logged in</Text>
-                </Container>
-                <Container>
-                    <Text>Token {params.token}</Text>
+                    <Text style={{fontWeight: 'bold', fontSize: 24}}>This is the home screen</Text>
                 </Container>
             </ScrollView>
         )
@@ -38,11 +36,7 @@ class ProfileScreen extends Component {
 }
 
 function mapStateToProps(state) {
-    return {
-        token: state.token
-    }
+    return {}
 }
 
-export default connect(
-    mapStateToProps
-)(ProfileScreen)
+export default connect(mapStateToProps)(Home)

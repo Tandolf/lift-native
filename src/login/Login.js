@@ -6,38 +6,17 @@ import * as LoginActionCreators from './actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Label from '../components/Label';
-
-
-const styles = StyleSheet.create({
-    scroll: {
-        backgroundColor: '#ddd6e1',
-        padding: 30,
-        flex: 1,
-        justifyContent: 'center'
-    },
-    label: {
-        color: '#2d2d2d',
-        fontSize: 20
-    },
-    textInput: {
-        height: 50,
-        fontSize: 20,
-        backgroundColor: '#FFF',
-        borderRadius: 5,
-        textAlign: 'center',
-    }
-});
-
+import MainScreen from "../pages/MainScreen";
+import styles from "./styles";
 
 class Login extends Component {
 
     constructor(props){
         super(props);
+        this.state = {
+            username: "thomas.andolf@gmail.com"
+        };
     }
-
-    static navigationOptions = {
-        header: null
-    };
 
     clearText = () => {
         this._usernameTextInput.setNativeProps({text: ''});
@@ -46,8 +25,8 @@ class Login extends Component {
 
     press() {
         const formData = new FormData();
-        formData.append("username", this.props.username);
-        formData.append("password", this.props.password);
+        formData.append("username", this.state.username);
+        formData.append("password", this.state.password);
         formData.append("scope", "user");
         formData.append("grant_type", "password");
         this.clearText();
@@ -65,14 +44,13 @@ class Login extends Component {
                 } else {
                     throw "Bad credentials";
                 }
+        }).then(responseJson => {
+            this.props.setToken(responseJson.access_token);
+            this.props.navigation.navigate('Generic', { component: MainScreen });
         })
-            .then(responseJson => {
-                this.props.setToken(responseJson.access_token);
-                this.props.navigation.navigate('Profile', { token: responseJson.access_token });
-            })
-            .catch(error => {
-                console.error(error);
-            });
+        .catch(error => {
+            console.error(error);
+        });
     }
 
     render() {
@@ -84,7 +62,8 @@ class Login extends Component {
                         ref={component => this._usernameTextInput = component}
                         autoCapitalize="none"
                         style={styles.textInput}
-                        onChangeText={(username) => this.props.setUsername(username) }
+                        onChangeText={(username) => this.setState({ username: username }) }
+                        value={this.state.username}
                     />
                 </Container>
                 <Container>
@@ -94,7 +73,8 @@ class Login extends Component {
                         autoCapitalize="none"
                         secureTextEntry={true}
                         style={styles.textInput}
-                        onChangeText={(password) => this.props.setPassword(password) }
+                        onChangeText={(password) => this.setState({ password: password }) }
+                        value={this.state.password}
                     />
                 </Container>
                 <Container>
@@ -110,15 +90,11 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
-    return {
-        token: state.token,
-        username: state.username,
-        password: state.password
-    }
+    return {};
 }
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators(LoginActionCreators, dispatch)
+    return bindActionCreators(LoginActionCreators, dispatch);
 };
 
 export default connect(
