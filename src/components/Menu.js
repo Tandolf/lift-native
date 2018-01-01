@@ -1,6 +1,6 @@
 import { TabNavigator } from 'react-navigation'
 import { NavigationComponent } from 'react-native-material-bottom-navigation'
-import Home from "../home/Home";
+import Home from "../home/home";
 import Settings from "../settings/Settings";
 import Calendar from "../calendar/Calendar";
 

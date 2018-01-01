@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, TextInput, ScrollView} from 'react-native';
+import { TextInput, ScrollView } from 'react-native';
 import Container from "../components/Container";
 import { Button } from 'react-native-elements'
 import * as LoginActionCreators from './actions'

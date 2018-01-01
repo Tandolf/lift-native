@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import connect from "react-redux/es/connect/connect";
 import Menu from "../components/Menu"
 
 class MainScreen extends Component {
@@ -15,8 +14,4 @@ class MainScreen extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {};
-}
-
-export default connect(mapStateToProps)(MainScreen)
+export default MainScreen

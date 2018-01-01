@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import loginReducer from './src/login/reducers'
 import { StackNavigator } from 'react-navigation';
-import Main from "./src/login/Login";;
+import Main from "./src/login/login";;
 import { Provider } from 'react-redux'
 import {applyMiddleware, createStore} from 'redux';
 import Logger from "./src/components/Logger";
