@@ -6,7 +6,7 @@ const initialState = {
     token: "",
 };
 
-function loginReducer(state = initialState, action) {
+export function loginReducer(state = initialState, action) {
     switch (action.type) {
         case SET_TOKEN:
             return { ...state, token: action.token };
@@ -14,5 +14,3 @@ function loginReducer(state = initialState, action) {
             return state;
     }
 }
-
-export default loginReducer

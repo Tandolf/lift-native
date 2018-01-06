@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import loginReducer from './src/login/reducers'
+import combineReducers from './combineReducers'
 import { StackNavigator } from 'react-navigation';
-import Main from "./src/login/login";;
+import Main from "./src/login/login";
 import { Provider } from 'react-redux'
 import {applyMiddleware, createStore} from 'redux';
 import Logger from "./src/components/Logger";
+import thunk from 'redux-thunk';
 import GenericScreen from "./src/components/GenericScreen";
 
 
@@ -15,7 +16,7 @@ const SimpleApp = StackNavigator({
     headerMode: "none"
 });
 
-const store = createStore(loginReducer, applyMiddleware(Logger));
+const store = createStore(combineReducers, applyMiddleware(Logger, thunk));
 
 export default class App extends Component {
     render() {

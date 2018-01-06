@@ -3,6 +3,8 @@ import Container from "../components/Container";
 import { StyleSheet, ScrollView, Text } from 'react-native';
 import connect from "react-redux/es/connect/connect";
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import * as UserActionCreators from './actions'
+import {bindActionCreators} from "redux";
 
 const styles = StyleSheet.create({
     scroll: {
@@ -17,37 +19,12 @@ class Home extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            name: "",
-        };
     }
 
     componentDidMount() {
-
         console.log('Component did mount bitch!');
-        let base64 = this.props.token.split(".");
-        const userId = JSON.parse(window.atob(base64[1])).sub;
-
-        fetch('https://lift-service.herokuapp.com/users/' + userId, {
-            method: 'Get',
-            headers: {
-                Accept: 'application/json',
-                Authorization: 'Bearer ' + this.props.token
-            }
-        }).then(response => {
-            if(response.status === 200) {
-                return response.json();
-            } else {
-                throw "Bad credentials";
-            }
-        }).then(responseJson => {
-            console.log(responseJson);
-            this.setState({ name: JSON.stringify(responseJson, null, 2) });
-            console.log(this.state.name);
-        })
-        .catch(error => {
-            console.error(error);
-        });
+        let userId = JSON.parse(window.atob(this.props.token.split(".")[1])).sub;
+        this.props.fetchUser(userId);
     }
 
     static navigationOptions = {
@@ -60,7 +37,7 @@ class Home extends Component {
             <ScrollView contentContainerStyle={styles.scroll}>
                 <Container>
                     <Text style={{fontWeight: 'bold', fontSize: 24}}>This is the home screen</Text>
-                    <Text style={{fontSize: 18}}>{this.state.name}</Text>
+                    <Text style={{fontSize: 18}}>{this.props.user.name.formatted}</Text>
                 </Container>
             </ScrollView>
         )
@@ -69,8 +46,13 @@ class Home extends Component {
 
 function mapStateToProps(state) {
     return {
-        token: state.token
+        token: state.login.token,
+        user: state.user
     }
 }
 
-export default connect(mapStateToProps)(Home)
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators(UserActionCreators, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
