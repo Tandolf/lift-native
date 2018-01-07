@@ -5,26 +5,12 @@ import connect from "react-redux/es/connect/connect";
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import * as UserActionCreators from './actions'
 import {bindActionCreators} from "redux";
-
-const styles = StyleSheet.create({
-    scroll: {
-        backgroundColor: '#e1e100',
-        padding: 30,
-        flex: 1,
-        justifyContent: 'center'
-    }
-});
+import styles from "./styles";
 
 class Home extends Component {
 
     constructor(props) {
         super(props);
-    }
-
-    componentDidMount() {
-        console.log('Component did mount bitch!');
-        let userId = JSON.parse(window.atob(this.props.token.split(".")[1])).sub;
-        this.props.fetchUser(userId);
     }
 
     static navigationOptions = {
@@ -46,7 +32,6 @@ class Home extends Component {
 
 function mapStateToProps(state) {
     return {
-        token: state.login.token,
         user: state.user
     }
 }

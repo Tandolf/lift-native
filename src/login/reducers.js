@@ -2,14 +2,12 @@ import {
     SET_TOKEN
 } from './actions'
 
-const initialState = {
-    token: "",
-};
+const initialState = {};
 
-export function loginReducer(state = initialState, action) {
+export function authReducer(state = initialState, action) {
     switch (action.type) {
         case SET_TOKEN:
-            return { ...state, token: action.token };
+            return { ...state, ...action.tokenData };
         default:
             return state;
     }

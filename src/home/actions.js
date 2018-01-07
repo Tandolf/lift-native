@@ -4,9 +4,9 @@ export const FETCH_USER = 'FETCH_USER';
 export const SET_USER = 'SET_USER';
 
 
-export function fetchUser(userId) {
+export function getUser(userId) {
     return (dispatch, getState) => {
-        return get(getState().login.token, userId)
+        return get(getState().auth.access_token, userId)
             .then(response => {
                 if(response.ok) {
                     return response.json();

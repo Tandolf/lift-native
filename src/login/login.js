@@ -3,6 +3,7 @@ import { TextInput, ScrollView } from 'react-native';
 import Container from "../components/Container";
 import { Button } from 'react-native-elements'
 import * as LoginActionCreators from './actions'
+import * as UserActionCreators from '../home/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Label from '../components/Label';
@@ -16,6 +17,15 @@ class Login extends Component {
         this.state = {
             username: "thomas.andolf@gmail.com"
         };
+    };
+
+    componentWillReceiveProps(nextProps){
+        if(this.props.access_token !== nextProps.access_token) {
+            const userId = JSON.parse(window.atob(nextProps.access_token.split(".")[1])).sub;
+            this.props.getUser(userId);
+        } else if(this.props.user !== nextProps.user) {
+            this.props.navigation.navigate('Generic', { component: MainScreen });
+        }
     }
 
     clearText = () => {
@@ -24,33 +34,13 @@ class Login extends Component {
     };
 
     press() {
-        const formData = new FormData();
-        formData.append("username", this.state.username);
-        formData.append("password", this.state.password);
-        formData.append("scope", "user");
-        formData.append("grant_type", "password");
+        const loginFormData = new FormData();
+        loginFormData.append("username", this.state.username);
+        loginFormData.append("password", this.state.password);
+        loginFormData.append("scope", "user");
+        loginFormData.append("grant_type", "password");
         this.clearText();
-        fetch('https://lift-auth-service.herokuapp.com/uaa/oauth/token', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                Authorization: 'Basic aW9zOnNlY3JldA==',
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: formData
-        }).then(response => {
-                if(response.status === 200) {
-                    return response.json();
-                } else {
-                    throw "Bad credentials";
-                }
-        }).then(responseJson => {
-            this.props.setToken(responseJson.access_token);
-            this.props.navigation.navigate('Generic', { component: MainScreen });
-        })
-        .catch(error => {
-            console.error(error);
-        });
+        this.props.getToken(loginFormData);
     }
 
     render() {
@@ -90,11 +80,14 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
-    return {};
+    return {
+        access_token: state.auth.access_token,
+        user: state.user
+    };
 }
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators(LoginActionCreators, dispatch);
+    return bindActionCreators({ ...LoginActionCreators, ...UserActionCreators }, dispatch);
 };
 
 export default connect(
