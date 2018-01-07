@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     scroll: {
-        backgroundColor: '#ddd6e1',
+        backgroundColor: '#FFFFFF',
         padding: 30,
         flex: 1,
         justifyContent: 'center'
@@ -10,13 +10,6 @@ const styles = StyleSheet.create({
     label: {
         color: '#2d2d2d',
         fontSize: 20
-    },
-    textInput: {
-        height: 50,
-        fontSize: 20,
-        backgroundColor: '#FFF',
-        borderRadius: 5,
-        textAlign: 'center',
     }
 });
 

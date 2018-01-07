@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import Container from "../components/Container";
-import { StyleSheet, ScrollView, Text } from 'react-native';
+import { ScrollView, Text } from 'react-native';
 import connect from "react-redux/es/connect/connect";
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import { Header} from 'react-native-elements';
 import * as UserActionCreators from './actions'
 import {bindActionCreators} from "redux";
+import User from './User';
 import styles from "./styles";
 
 class Home extends Component {
@@ -21,10 +22,10 @@ class Home extends Component {
     render(){
         return (
             <ScrollView contentContainerStyle={styles.scroll}>
-                <Container>
-                    <Text style={{fontWeight: 'bold', fontSize: 24}}>This is the home screen</Text>
-                    <Text style={{fontSize: 18}}>{this.props.user.name.formatted}</Text>
-                </Container>
+                <Header backgroundColor={'#FCFCFC'}
+                        outerContainerStyles={{ height: 40 }}
+                />
+                <User userName={this.props.user.userName}/>
             </ScrollView>
         )
     }

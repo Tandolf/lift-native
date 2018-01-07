@@ -1,6 +1,6 @@
 import { TabNavigator } from 'react-navigation'
 import { NavigationComponent } from 'react-native-material-bottom-navigation'
-import Home from "../home/home";
+import Home from "../home/Home";
 import Settings from "../settings/Settings";
 import Calendar from "../calendar/Calendar";
 
@@ -17,10 +17,10 @@ const Menu = TabNavigator({
             rippleColor: 'white',
             tabs: {
                 Home: {
-                    barBackgroundColor: '#37474F'
+                    barBackgroundColor: '#c10003'
                 },
                 Calendar: {
-                    barBackgroundColor: '#4f0004'
+                    barBackgroundColor: '#4f0002'
                 },
                 Settings: {
                     barBackgroundColor: '#00796B'
