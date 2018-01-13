@@ -10,6 +10,9 @@ const styles = StyleSheet.create({
     label: {
         color: '#2d2d2d',
         fontSize: 20
+    },
+    spinner: {
+        color: '#2d2d2d'
     }
 });
 

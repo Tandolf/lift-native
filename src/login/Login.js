@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, ActivityIndicator, Keyboard } from 'react-native';
 import Container from "../components/Container";
 import { Button, FormLabel, FormInput } from 'react-native-elements'
 import * as LoginActionCreators from './actions'
@@ -14,7 +14,8 @@ class Login extends Component {
     constructor(props){
         super(props);
         this.state = {
-            username: "thomas.andolf@gmail.com"
+            username: "thomas.andolf@gmail.com",
+            isLoading: false
         };
     };
 
@@ -33,12 +34,14 @@ class Login extends Component {
     };
 
     press() {
+        this.setState({isLoading: true});
         const loginFormData = new FormData();
         loginFormData.append("username", this.state.username);
         loginFormData.append("password", this.state.password);
         loginFormData.append("scope", "user");
         loginFormData.append("grant_type", "password");
         this.clearText();
+        Keyboard.dismiss();
         this.props.getToken(loginFormData);
     }
 
@@ -72,6 +75,8 @@ class Login extends Component {
                         backgroundColor='#c10003'
                     />
                 </Container>
+                    <ActivityIndicator size="large" color={styles.spinner.color} animating={this.state.isLoading} hidesWhenStopped={true}/>
+                <Container/>
             </ScrollView>
          )
     }
