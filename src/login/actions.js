@@ -1,9 +1,14 @@
 import { login } from '../api/tokenApi';
 
 export const SET_TOKEN = 'SET_TOKEN';
+export const DELETE_TOKEN = 'DELETE_TOKEN';
 
 export function setToken(tokenData) {
     return { type: SET_TOKEN, tokenData }
+}
+
+export function deleteToken() {
+    return { type: DELETE_TOKEN }
 }
 
 export function getToken(loginFormData) {
