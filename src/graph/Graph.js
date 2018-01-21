@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Container from "../components/Container";
-import { StyleSheet, ScrollView, Text } from 'react-native';
+import { StyleSheet, ScrollView, Text, View, Slider} from 'react-native';
 import connect from "react-redux/es/connect/connect";
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import TimePicker from "../components/TimePicker";
 
 const styles = StyleSheet.create({
     scroll: {
-        backgroundColor: '#e10009',
+        backgroundColor: '#ffffff',
         padding: 30,
         flex: 1,
         justifyContent: 'center'
@@ -27,9 +27,7 @@ class Graph extends Component {
     render(){
         return (
             <ScrollView contentContainerStyle={styles.scroll}>
-                <Container>
-                    <Text style={{fontWeight: 'bold', fontSize: 30}}>This is the graph screen</Text>
-                </Container>
+                <TimePicker />
             </ScrollView>
         )
     }
