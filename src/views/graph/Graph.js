@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, ScrollView, Text, View, Slider} from 'react-native';
 import connect from "react-redux/es/connect/connect";
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import TimePicker from "../components/TimePicker";
+import TimeDatePicker from "../../components/TimeDatePicker";
 
 const styles = StyleSheet.create({
     scroll: {
@@ -27,7 +27,7 @@ class Graph extends Component {
     render(){
         return (
             <ScrollView contentContainerStyle={styles.scroll}>
-                <TimePicker />
+                <TimeDatePicker />
             </ScrollView>
         )
     }

@@ -1,9 +1,9 @@
 import { TabNavigator } from 'react-navigation'
 import { NavigationComponent } from 'react-native-material-bottom-navigation'
-import Home from "../home/Home";
-import Calendar from "../calendar/Calendar";
-import Log from "../log/Log";
-import Graph from "../graph/Graph";
+import Home from "../views/home/Home";
+import Calendar from "../views/calendar/Calendar";
+import Log from "../views/log/Log";
+import Graph from "../views/graph/Graph";
 import Settings from "../settings/Settings";
 
 const MainMenu = TabNavigator({

@@ -3,9 +3,9 @@ import { ScrollView, Text } from 'react-native';
 import connect from "react-redux/es/connect/connect";
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Header} from 'react-native-elements';
-import * as UserActionCreators from './actions'
+import * as UserActionCreators from '../../actions/userActions'
 import {bindActionCreators} from "redux";
-import User from './User';
+import User from '../../components/User';
 import styles from "./styles";
 
 class Home extends Component {

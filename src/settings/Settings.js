@@ -4,8 +4,8 @@ import {ScrollView, StyleSheet} from 'react-native';
 import connect from "react-redux/es/connect/connect";
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import {Button} from 'react-native-elements'
-import * as LoginActionCreators from "../login/actions";
-import * as UserActionCreators from '../home/actions'
+import * as LoginActionCreators from "../actions/authenticationActions";
+import * as UserActionCreators from '../actions/userActions'
 import {bindActionCreators} from 'redux'
 
 const styles = StyleSheet.create({

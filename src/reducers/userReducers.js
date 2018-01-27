@@ -1,7 +1,7 @@
 import {
     CLEAR_USER,
     SET_USER
-} from './actions'
+} from '../actions/userActions'
 
 const initialState = {
     id: undefined,

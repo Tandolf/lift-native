@@ -1,7 +1,7 @@
 import {
     SET_TOKEN,
     DELETE_TOKEN
-} from './actions'
+} from '../actions/authenticationActions'
 
 const initialState = {
     access_token: undefined

@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
-import { ScrollView, ActivityIndicator, Keyboard } from 'react-native';
-import Container from "../components/Container";
-import { Button, FormLabel, FormInput } from 'react-native-elements'
-import * as LoginActionCreators from './actions'
-import * as UserActionCreators from '../home/actions'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import React, {Component} from 'react';
+import {ActivityIndicator, Keyboard, ScrollView} from 'react-native';
+import Container from "../../components/Container";
+import {Button, FormInput, FormLabel} from 'react-native-elements'
+import * as LoginActionCreators from '../../actions/authenticationActions'
+import * as UserActionCreators from '../../actions/userActions'
+import * as ExercisesActionCreators from '../../actions/exerciseActions'
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
 import styles from "./styles";
 import base64 from "base-64";
 
@@ -25,6 +26,7 @@ class Login extends Component {
         } else if(this.props.auth.access_token !== nextProps.auth.access_token) {
             const userId = JSON.parse(base64.decode(nextProps.auth.access_token.split(".")[1])).sub;
             this.props.getUser(userId);
+            this.props.getExercises();
         }
         if(!nextProps.user.id) {
             return;
@@ -97,7 +99,7 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators({ ...LoginActionCreators, ...UserActionCreators }, dispatch);
+    return bindActionCreators({ ...LoginActionCreators, ...UserActionCreators, ...ExercisesActionCreators}, dispatch);
 };
 
 export default connect(

@@ -5,17 +5,19 @@ const styles1 = StyleSheet.create({
     container: {
         backgroundColor: '#FFFFFF',
         justifyContent: "flex-start",
-        padding: 15
+        padding: 5,
+        flex: 1
     },
     timeWrapper: {
+        flex: 1,
         flexDirection: 'row',
         justifyContent: 'center',
-        padding: 15
+        alignItems: 'center'
     },
     gray: {
         backgroundColor: '#f5f5f5',
         borderWidth: 0.5,
-        borderColor: '#c3c3c3',
+        borderColor: '#c3c3c3'
     },
     numberWrapper: {
         width: 50,
@@ -34,7 +36,8 @@ const styles1 = StyleSheet.create({
         fontSize: 24,
     },
     sliderWrapper: {
-        paddingTop: 20
+        flex: 1,
+        paddingTop: 10
     },
     slider: {
         marginLeft: 10,
@@ -71,7 +74,7 @@ export default class TimePicker extends Component {
                 <View style={styles1.sliderWrapper}>
                     <Text>Hours:</Text>
                     <Slider style={styles1.slider}
-                            maximumValue={24}
+                            maximumValue={23}
                             step={1}
                             value={this.state.hours}
                             onValueChange={(value) => this.setState({ hours: value })}
