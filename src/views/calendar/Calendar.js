@@ -10,7 +10,6 @@ import {bindActionCreators} from "redux";
 
 const styles = StyleSheet.create({
     scroll: {
-        backgroundColor: '#fffdf8',
         flex: 1,
         justifyContent: 'center',
         paddingTop: 20
