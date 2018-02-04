@@ -6,14 +6,24 @@ import {Provider} from 'react-redux'
 import {applyMiddleware, createStore} from 'redux';
 import Logger from "./src/components/Logger";
 import thunk from 'redux-thunk';
-import MainMenu from "./src/components/MainMenu";
 import Splash from "./src/views/splash/Splash";
+import {View} from "react-native";
+import MainMenu from "./src/components/MainMenu";
 
+class NavigatorWrappingScreen extends React.Component {
+    render() {
+        return (
+            <View style={{flex: 1}}>
+                <MainMenu />
+            </View>
+        );
+    }
+}
 
 const MainNavigation = StackNavigator({
     Splash: { screen: Splash },
     Login: { screen: Login },
-    Main: { screen: ({ navigation }) => <MainMenu screenProps={{ rootNavigation: navigation }} /> }
+    Main: { screen: NavigatorWrappingScreen }
 }, {
     headerMode: "none"
 });

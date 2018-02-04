@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { ScrollView, Text } from 'react-native';
-import connect from "react-redux/es/connect/connect";
+import { ScrollView } from 'react-native';
+import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Header} from 'react-native-elements';
-import * as UserActionCreators from '../../actions/userActions'
+import * as viewActionCreators from '../../actions/viewActions'
 import {bindActionCreators} from "redux";
 import User from '../../components/User';
 import styles from "./styles";
+import {Button} from "native-base";
 
 class Home extends Component {
 
@@ -14,9 +15,12 @@ class Home extends Component {
         super(props);
     }
 
-    static navigationOptions = {
-        tabBarLabel: 'Home',
-        tabBarIcon: () => (<Icon size={24} color="white" name="home" />)
+    static navigationOptions = ({ navigation }) => {
+        const { params = {} } = navigation.state;
+        return {
+            headerRight: (<Button transparent onPress={() => navigation.navigate('Settings')}><Icon size={24} name='settings' /></Button>),
+            tabBarIcon: () => (<Icon size={24} color="white" name="home" />)
+        }
     };
 
     render(){
@@ -33,12 +37,13 @@ class Home extends Component {
 
 function mapStateToProps(state) {
     return {
-        user: state.user
+        user: state.user,
+        currentView: state.view.currentView
     }
 }
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators(UserActionCreators, dispatch);
+    return bindActionCreators({...viewActionCreators}, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

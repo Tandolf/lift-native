@@ -1,17 +1,32 @@
-import { TabNavigator } from 'react-navigation'
-import { NavigationComponent } from 'react-native-material-bottom-navigation'
+import React from 'react'
+import {StackNavigator, TabNavigator} from 'react-navigation'
+import {NavigationComponent} from 'react-native-material-bottom-navigation'
 import Home from "../views/home/Home";
 import Calendar from "../views/calendar/Calendar";
 import Log from "../views/log/Log";
 import Graph from "../views/graph/Graph";
 import Settings from "../settings/Settings";
+import Week from "../views/Week";
+
+
+const HomeNavigation = StackNavigator({
+        Calendar: { screen: Calendar },
+        Settings: { screen: Settings },
+        Week: { screen: Week }
+    }
+);
+
+const CalenderNavigation = StackNavigator({
+        Calendar: { screen: Calendar },
+        Week: { screen: Week },
+    }
+);
 
 const MainMenu = TabNavigator({
-    Home: { screen: Home },
-    Calendar: { screen: Calendar },
+    Calendar: { screen: CalenderNavigation },
     Log: { screen: Log },
     Graph: { screen: Graph },
-    Settings: { screen: Settings }
+    Home: { screen: Home }
 }, {
     tabBarComponent: NavigationComponent,
     tabBarPosition: 'bottom',
@@ -20,9 +35,6 @@ const MainMenu = TabNavigator({
             labelColor: 'white',
             rippleColor: 'white',
             tabs: {
-                Home: {
-                    barBackgroundColor: '#004f02'
-                },
                 Calendar: {
                     barBackgroundColor: '#4f0002'
                 },
@@ -32,12 +44,13 @@ const MainMenu = TabNavigator({
                 Graph: {
                     barBackgroundColor: '#4d4f00'
                 },
-                Settings: {
+                Home: {
                     barBackgroundColor: '#00796B'
                 }
             }
         }
     }
 });
+
 
 export default MainMenu;

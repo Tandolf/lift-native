@@ -25,7 +25,7 @@ class Settings extends Component {
 
     static navigationOptions = {
         tabBarLabel: 'Settings',
-        tabBarIcon: () => (<Icon size={24} color="white" name="settings" />)
+        tabBarIcon: () => (<Icon size={24} color="white" name="home" />)
     };
 
     logout() {
